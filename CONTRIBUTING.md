@@ -51,3 +51,12 @@ sam invoke WorldFunction --template ./.aws-sam/build/template.yaml --event ./.aw
 ```shell
 sam deploy --resolve-s3
 ```
+
+## AWS CLI samples
+
+```shell
+aws lambda list-functions --region=us-east-1
+aws lambda list-functions --region=us-west-2
+aws lambda get-function --region=us-east-1 --function-name hello-aws-golang-dev-HelloFunction
+
+```

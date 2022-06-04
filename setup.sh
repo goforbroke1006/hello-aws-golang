@@ -26,7 +26,10 @@ set -e
 )
 
 npm install -g serverless
+sls --version
 
 if [[ ! -f ~/.aws/credentials ]]; then
   aws configure
 fi
+
+sudo apt install -y jq

@@ -2,20 +2,20 @@
 
 SERVERLESS_BUILD_DIR=./bin
 
-serverless/all: dep serverless/build serverless/deploy
+sls/all: dep sls/build sls/deploy
 sam/all: dep sam/build sam/deploy
 
 dep:
 	go mod download
 
-serverless/build:
+sls/build:
 	CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o ${SERVERLESS_BUILD_DIR}/hello hello/main.go
 	CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o ${SERVERLESS_BUILD_DIR}/world world/main.go
 
-serverless/deploy:
+sls/deploy:
 	serverless deploy --verbose
 
-serverless/destroy:
+sls/destroy:
 	serverless remove
 
 sam/build:
