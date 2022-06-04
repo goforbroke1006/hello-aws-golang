@@ -39,11 +39,21 @@ echo "{}" > ./.aws-sam/event.json
 sam local invoke ${LAMBDA_NAME} --template ./.aws-sam/build/template.yaml --event ./.aws-sam/event.json
 ```
 
-### How to run lambda function on local machine with SAM
+### How to run remote lambda function
 
 ```shell
-echo "{}" > ./.aws-sam/event.json
-sam invoke WorldFunction --template ./.aws-sam/build/template.yaml --event ./.aws-sam/event.json
+aws lambda invoke --region us-east-1 \
+  --function-name hello-aws-golang-dev-HelloFunction \
+  --invocation-type RequestResponse \
+  --payload "{}" \
+  outlog.txt
+
+aws lambda invoke --region us-east-1 \
+  --function-name hello-aws-golang-dev-WorldFunction \
+  --invocation-type RequestResponse \
+  --payload "{}" \
+  outlog.txt
+  
 ```
 
 ### How to deploy
@@ -60,3 +70,7 @@ aws lambda list-functions --region=us-west-2
 aws lambda get-function --region=us-east-1 --function-name hello-aws-golang-dev-HelloFunction
 
 ```
+
+### Usefull links
+
+* [samconfig.toml sample](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html)
