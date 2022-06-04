@@ -2,9 +2,10 @@
 
 SERVERLESS_BUILD_DIR=./bin
 
-serverless/all: serverless/dep serverless/build serverless/deploy
+serverless/all: dep serverless/build serverless/deploy
+sam/all: dep sam/build sam/deploy
 
-serverless/dep:
+dep:
 	go mod download
 
 serverless/build:
@@ -14,8 +15,14 @@ serverless/build:
 serverless/deploy:
 	serverless deploy --verbose
 
+serverless/destroy:
+	serverless remove
+
 sam/build:
 	sam build --template ./template.yaml
 
 sam/deploy:
 	sam deploy --resolve-s3
+
+sam/destroy:
+	sam delete

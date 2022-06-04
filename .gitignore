@@ -1,3 +1,6 @@
+# ide
+/.idea
+
 # Lambda support directories
 /.aws-sam
 /.serverless
