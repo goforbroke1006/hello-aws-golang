@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Description: An example serverless API and worker written in Golang.
+
+Resources:
+#  HelloAwsGolangStorage:
+#    Type: AWS::S3::Bucket
+#    Properties:
+#      BucketName: hello-aws-golang-source-bucket
+
+  HelloFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: go1.x
+      Handler: api
+      Timeout: 10
+      CodeUri: ./hello/
+  WorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: go1.x
+      Handler: api
+      Timeout: 10
+      CodeUri: ./world/
+
+#    Metadata:
+#      BuildMethod: makefile
+#    Properties:
+#      CodeUri: hello-world/
+#      Handler: my.bootstrap.file
+#      Runtime: provided.al2
+#      Architectures: [arm64]
+#      Events:
+#        HelloHandler:
+#          Type: Api
+#          Properties:
+#            Path: '/hello'
+#            Method: get
