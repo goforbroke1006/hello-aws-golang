@@ -10,11 +10,11 @@ Resources:
       Runtime: go1.x
       Handler: api
       Timeout: 10
-      CodeUri: ./hello/
+      CodeUri: ./cmd/hello/
   WorldFunction:
     Type: AWS::Serverless::Function
     Properties:
       Runtime: go1.x
       Handler: api
       Timeout: 10
-      CodeUri: ./world/
+      CodeUri: ./cmd/world/

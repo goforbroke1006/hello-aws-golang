@@ -1,6 +1,7 @@
 .PHONY: build clean deploy
 
-SERVERLESS_BUILD_DIR=./bin
+SRC_DIR=./cmd
+BUILD_DIR=./bin
 
 sls/all: dep sls/build sls/deploy
 sam/all: dep sam/build sam/deploy
@@ -9,13 +10,13 @@ dep:
 	go mod download
 
 sls/build:
-	CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o ${SERVERLESS_BUILD_DIR}/hello hello/main.go
-	CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o ${SERVERLESS_BUILD_DIR}/world world/main.go
+	CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o ${BUILD_DIR}/hello ${SRC_DIR}/hello/main.go
+	CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o ${BUILD_DIR}/world ${SRC_DIR}/world/main.go
 
 sls/deploy:
 	serverless deploy --verbose
 
-sls/destroy:
+sls/undeploy:
 	serverless remove
 
 sam/build:
@@ -24,5 +25,5 @@ sam/build:
 sam/deploy:
 	sam deploy --resolve-s3
 
-sam/destroy:
+sam/undeploy:
 	sam delete

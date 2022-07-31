@@ -5,20 +5,20 @@
 #### How to get information about deployed functions
 
 ```shell
-serverless info
+sls info
 ```
 
 #### How to deploy
 
 ```shell
-serverless deploy --verbose
+sls deploy --verbose
 ```
 
-#### How to invoke lambda function
+#### How to invoke lambda function with SLS
 
 ```shell
-serverless invoke --function HellodFunction
-serverless invoke --function WorldFunction
+sls invoke --function HelloFunction
+sls invoke --function WorldFunction
 ```
 
 ## SAM
@@ -29,14 +29,18 @@ serverless invoke --function WorldFunction
 sam init --runtime go1.x --name helloworld
 ```
 
-### How to run lambda function on local machine with SAM
+### How to invoke lambda function on local machine with SAM
+
+Same things you can run from **template.yaml** in IDE if **AWS Toolkit** plugin installed.
 
 ```shell
 export LAMBDA_NAME=WorldFunction
 
 sam build ${LAMBDA_NAME} --template ./template.yaml --build-dir ./.aws-sam/build
-echo "{}" > ./.aws-sam/event.json
-sam local invoke ${LAMBDA_NAME} --template ./.aws-sam/build/template.yaml --event ./.aws-sam/event.json
+echo "{}" > /tmp/${LAMBDA_NAME}-event.json
+sam local invoke ${LAMBDA_NAME} \
+  --template ./.aws-sam/build/template.yaml \
+  --event    /tmp/${LAMBDA_NAME}-event.json
 ```
 
 ### How to run remote lambda function

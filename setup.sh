@@ -2,6 +2,7 @@
 
 set -e
 
+# install AWS CLI
 (
   sudo apt update
   sudo apt-get remove -y awscli
@@ -15,6 +16,7 @@ set -e
   aws --version
 )
 
+# install AWS SAM
 (
   cd ~/ || exit 1
   if [[ ! -f ./aws-sam-cli-linux-x86_64.zip ]]; then
@@ -25,11 +27,15 @@ set -e
   sam --version
 )
 
-npm install -g serverless
+# install Serverless Framework CLI
+npm install --location=global npm
+npm install --location=global serverless
 sls --version
 
+# configure AWS CLI with your Amazon account
 if [[ ! -f ~/.aws/credentials ]]; then
   aws configure
 fi
 
+# install tool for working with json in command line
 sudo apt install -y jq
